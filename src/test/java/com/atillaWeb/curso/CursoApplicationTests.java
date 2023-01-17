@@ -1,4 +1,4 @@
-package com.atillaWeb.curso;
+package com.atillaweb.curso;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
