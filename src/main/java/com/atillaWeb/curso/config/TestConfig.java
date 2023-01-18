@@ -1,8 +1,10 @@
 package com.atillaweb.curso.config;
 
+import com.atillaweb.curso.entities.Category;
 import com.atillaweb.curso.entities.Order;
 import com.atillaweb.curso.entities.User;
 import com.atillaweb.curso.entities.enums.OrderStatus;
+import com.atillaweb.curso.repositories.CategoryRepository;
 import com.atillaweb.curso.repositories.OrderRepository;
 import com.atillaweb.curso.repositories.UserRepository;
 import java.time.Instant;
@@ -22,8 +24,17 @@ public class TestConfig implements CommandLineRunner {
   @Autowired
   private OrderRepository orderrRepository;
 
+  @Autowired
+  private CategoryRepository categoryRepository;
+
   @Override
   public void run(String... args) throws Exception {
+    Category cat1 = new Category(null, "Electronics");
+    Category cat2 = new Category(null, "Books");
+    Category cat3 = new Category(null, "Computers");
+
+    categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
     User u1 = new User(
       null,
       "Atilla jr",
