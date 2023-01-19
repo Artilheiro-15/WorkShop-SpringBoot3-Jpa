@@ -4,6 +4,7 @@ import com.atillaweb.curso.entities.User;
 import com.atillaweb.curso.repositories.UserRepository;
 import com.atillaweb.curso.services.excepitions.DatabaseException;
 import com.atillaweb.curso.services.excepitions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,13 @@ public class UserService {
 
   //aki vou cria a funçao para atualizar um dado usuario
   public User update(Long id, User obj) {
-    User entity = repository.getReferenceById(id);
-    updateData(entity, obj);
-    return repository.save(entity);
+    try {
+      User entity = repository.getReferenceById(id);
+      updateData(entity, obj);
+      return repository.save(entity);
+    } catch (EntityNotFoundException e) {
+      throw new ResourceNotFoundException(id);
+    }
   }
 
   //Esse metodo e para atualizar os dados do entity com base com oque chegou no obj
