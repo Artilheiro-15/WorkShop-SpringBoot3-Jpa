@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-  //aki eu vou implementar duas operaçoes basicas que e a operaçao para buscar
-  //todos os usuarios e a operaçao para buscar o usuario por id
-
   @Autowired
   private UserRepository repository;
 
@@ -23,5 +20,9 @@ public class UserService {
   public User findById(Long id) {
     Optional<User> obj = repository.findById(id);
     return obj.get();
+  }
+
+  public User insert(User obj) {
+    return repository.save(obj);
   }
 }
